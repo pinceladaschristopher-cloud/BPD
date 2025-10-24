@@ -51,26 +51,6 @@
             --border-color: rgba(0,0,0,0.1);
         }
 
-        /* Estilos para el modo oscuro */
-        body.dark {
-            --primary-color: #0A2647; /* Se mantiene igual, pero el fondo cambia */
-            --secondary-color: #144272;
-            --accent-color: #2C74B3;
-            --highlight-color: #205295;
-            --background-color: #0A1929;
-            --card-bg: #0E2A47;
-            --text-primary: #E5E7EB;
-            --text-secondary: #9CA3AF;
-            --success-color: #0d6efd; /* Se mantiene */
-            --negative-balance: rgba(220, 38, 38, 0.8); /* Se mantiene */
-            --card-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.3), 0 1px 2px -1px rgb(0 0 0 / 0.3);
-            --user-card-bg: #144272;
-            --change-notification: rgba(44, 116, 179, 0.2);
-            --rapid-change-notification: rgba(234, 179, 8, 0.2);
-            --persistent-change-notification: rgba(220, 38, 38, 0.2);
-            --border-color: rgba(255, 255, 255, 0.1);
-        }
-
         body {
             background: var(--background-color);
             color: var(--text-primary);
@@ -102,11 +82,6 @@
             opacity: 1;
             visibility: visible;
         }
-        
-        body.dark .page-overlay {
-            background: rgba(0, 0, 0, 0.5);
-        }
-
 
         /* Animación de bienvenida */
         .welcome-screen {
@@ -284,7 +259,7 @@
             font-size: 1.25rem;
             font-weight: 600;
             color: var(--text-primary);
-            cursor: default; /* Ya no es clickeable */
+            cursor: pointer;
             display: flex;
             align-items: center;
             gap: 0.75rem;
@@ -295,27 +270,8 @@
         .header-controls {
             display: flex;
             align-items: center;
-            gap: 1rem; /* Restaurado */
+            gap: 1rem;
         }
-
-        .admin-btn {
-            background: var(--user-card-bg);
-            border: 1px solid var(--border-color);
-            color: var(--text-primary);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: var(--transition);
-        }
-        .admin-btn:hover {
-            background-color: var(--border-color);
-        }
-
 
         .container {
             max-width: 1024px;
@@ -343,30 +299,6 @@
             color: var(--text-secondary);
             font-size: 0.875rem;
         }
-
-        .dashboard-status {
-            font-size: 0.8125rem;
-            color: var(--text-secondary);
-            margin-top: 0.75rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            height: 20px; /* Altura fija para evitar saltos de layout */
-        }
-        .dashboard-status .fa-spin {
-            color: var(--accent-color);
-        }
-        .dashboard-status.error {
-            color: var(--alert-color);
-        }
-        .dashboard-status.offline {
-            color: var(--warning-color);
-        }
-        .dashboard-status.success {
-            color: var(--success-color);
-        }
-
 
         .dashboard-controls {
             display: flex;
@@ -509,13 +441,12 @@
 
         .usuario-item {
             width: 270px;
-            flex: 1 0 auto; /* Permite que crezca pero base de 270px */
-            min-width: 250px;
+            flex: 0 0 auto;
             padding: 0.3rem 0.5rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 0.5rem; /* Espacio entre info-left y pinceles-count */
+            gap: 0.3rem;
             border: 1px solid var(--border-color);
             border-radius: 4px;
             background: var(--user-card-bg);
@@ -555,18 +486,10 @@
             background-color: #333333;
             color: #ffffff !important;
         }
-        
-        /* Contenedor para ranking y nombre */
-        .usuario-info-left {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem; /* Espacio entre rank-indicator y nombre */
-            flex: 1; /* Permite que este contenedor crezca */
-            min-width: 0; /* Soluciona problemas de overflow de flexbox */
-        }
+
 
         .usuario-nombre {
-            flex-shrink: 1; /* Permite que el nombre se encoja si es necesario */
+            flex: 1;
             font-size: 0.8125rem;
             color: var(--text-primary);
             white-space: nowrap;
@@ -587,7 +510,7 @@
         .pinceles-count {
             background: var(--accent-color);
             padding: 0.15rem 0.5rem;
-            border-radius: 9999px; /* Estandarizado a píldora */
+            border-radius: 12px;
             font-size: 0.7rem;
             font-weight: 600;
             white-space: nowrap;
@@ -634,7 +557,7 @@
             position: relative;
             background: var(--card-bg);
             padding: 1rem 1.25rem;
-            border-radius: 8px; /* Estandarizado */
+            border-radius: 12px;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
             z-index: 999;
             display: flex;
@@ -677,26 +600,13 @@
 
         .student-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255, 255, 255, 0.5); backdrop-filter: blur(8px); z-index: 1002; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease; }
         .student-modal.active { display: flex; opacity: 1; visibility: visible; align-items: center; justify-content: center; }
-        .student-modal-content {
-            background: var(--card-bg);
-            padding: 1.5rem;
-            border-radius: 8px; /* Estandarizado */
-            width: 90%;
-            max-width: 420px;
-            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-            transform: translateY(-20px);
-            opacity: 0;
-            transition: transform 0.3s ease, opacity 0.3s ease;
-            border: 1px solid var(--border-color);
-        }
-        
+        .student-modal-content { background: var(--card-bg); padding: 1.5rem; border-radius: 12px; width: 90%; max-width: 420px; box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1); transform: translateY(-20px); opacity: 0; transition: transform 0.3s ease, opacity 0.3s ease; border: 1px solid var(--border-color); }
         .student-modal.active .student-modal-content { transform: translateY(0); opacity: 1; }
         .student-modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 2px solid var(--accent-color); }
         .student-modal-title { font-size: 1.25rem; font-weight: 600; color: var(--text-primary); display: flex; align-items: center; gap: 0.5rem; }
         .student-modal-title i { color: var(--gold-color); }
         .close-student-modal { background: none; border: none; font-size: 1.25rem; cursor: pointer; color: var(--text-secondary); padding: 0.375rem; border-radius: 50%; transition: all 0.2s ease; }
         .close-student-modal:hover { background: rgba(0, 0, 0, 0.1); color: var(--text-primary); }
-        
         .student-info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 0; }
         .student-info-card { background: var(--user-card-bg); padding: 0.75rem; border-radius: 8px; text-align: center; border: 1px solid var(--border-color); transition: all 0.2s ease; }
         .student-info-card:hover { transform: translateY(-2px); box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); }
@@ -716,24 +626,13 @@
         
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255, 255, 255, 0.5); backdrop-filter: blur(8px); z-index: 1001; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease; }
         .modal.active { display: flex; opacity: 1; visibility: visible; align-items: center; justify-content: center; }
-        .modal-content {
-            background: var(--card-bg);
-            padding: 2rem;
-            border-radius: 8px; /* Estandarizado */
-            width: 90%;
-            max-width: 500px;
-            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-            transform: translateY(-20px);
-            opacity: 0;
-            transition: transform 0.3s ease, opacity 0.3s ease;
-        }
-        
+        .modal-content { background: var(--card-bg); padding: 2rem; border-radius: 12px; width: 90%; max-width: 500px; box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1); transform: translateY(-20px); opacity: 0; transition: transform 0.3s ease, opacity 0.3s ease; }
         .modal.active .modal-content { transform: translateY(0); opacity: 1; }
         .modal-header h2 { color: var(--text-primary); font-size: 1.25rem; margin-bottom: 1.5rem; text-align: center; font-weight: 600; }
         .modal-body input { width: 100%; padding: 0.75rem 1rem; border: 1px solid var(--border-color); border-radius: 8px; margin-bottom: 1.5rem; font-size: 0.875rem; transition: var(--transition); background-color: var(--background-color); color: var(--text-primary);}
         .modal-body input:focus { outline: none; border-color: var(--gold-color); box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1); }
         .modal-footer { display: flex; gap: 0.75rem; justify-content: flex-end; }
-        .modal-btn { padding: 0.625rem 1rem; border: none; border-radius: 8px; /* Estandarizado */ cursor: pointer; font-size: 0.875rem; font-weight: 500; transition: var(--transition); }
+        .modal-btn { padding: 0.625rem 1rem; border: none; border-radius: 6px; cursor: pointer; font-size: 0.875rem; font-weight: 500; transition: var(--transition); }
         .modal-btn.cancel { background: #e5e7eb; color: #000000; }
         .modal-btn.submit { background: var(--gold-gradient); color: #000000; }
         .modal-btn:hover { opacity: 0.9; }
@@ -818,7 +717,7 @@
 
         .access-btn {
             padding: 0.5rem 1.25rem;
-            border-radius: 8px; /* Estandarizado */
+            border-radius: 6px;
             font-size: 0.875rem;
             font-weight: 600;
             transition: var(--transition);
@@ -890,9 +789,7 @@
             Sistema de Gestión de Pinceles
         </h1>
         <div class="header-controls">
-            <button id="admin-btn" class="admin-btn" aria-label="Acceso de administrador">
-                <i class="fas fa-cog"></i>
-            </button>
+            <!-- Botón de tema eliminado -->
         </div>
     </header>
 
@@ -900,18 +797,16 @@
         <div class="dashboard-header">
             <h2 class="dashboard-title">Panel de Control</h2>
             <p class="dashboard-subtitle">Monitoreo en tiempo real de pinceles por grupo</p>
-            <div class="dashboard-status" id="dashboard-status">
-                <i class="fas fa-circle-notch fa-spin"></i>
-                <span>Cargando información...</span>
-            </div>
         </div>
         
         <div class="dashboard-controls">
         </div>
         
         <div id="grupos-container">
-            <!-- El contenido se genera dinámicamente -->
-            <!-- El mensaje de "loading" inicial ahora está en .dashboard-status -->
+            <div class="loading">
+                <i class="fas fa-circle-notch fa-spin"></i>
+                Cargando información...
+            </div>
         </div>
 
         <div class="countdown-container">
@@ -1001,7 +896,6 @@
         let lastCacheTime = null;
         let isOffline = false;
         let notificationCounter = 0;
-        let loadingIndicator; // Para el nuevo indicador de estado
 
         function formatNumber(num) {
             return new Intl.NumberFormat('es-DO').format(num);
@@ -1017,34 +911,7 @@
         }
 
         function updateConnectionStatus(status, message = '', isOffline = false) {
-            // console.log('Estado del sistema:', status, message); // Descomentar para debug
-            if (!loadingIndicator) loadingIndicator = document.getElementById('dashboard-status');
-            if (!loadingIndicator) return;
-
-            loadingIndicator.classList.remove('error', 'offline', 'success', 'updating');
-            let icon = '';
-
-            switch (status) {
-                case 'updating':
-                    loadingIndicator.classList.add('updating');
-                    icon = '<i class="fas fa-circle-notch fa-spin"></i>';
-                    break;
-                case 'error':
-                    loadingIndicator.classList.add('error');
-                    icon = '<i class="fas fa-exclamation-triangle"></i>';
-                    break;
-                case 'online':
-                    loadingIndicator.classList.add('success');
-                    icon = '<i class="fas fa-check-circle"></i>';
-                    break;
-            }
-            
-            if (isOffline && status !== 'online') {
-                loadingIndicator.classList.add('offline');
-                icon = '<i class="fas fa-wifi-slash"></i>';
-            }
-
-            loadingIndicator.innerHTML = `${icon} <span>${message}</span>`;
+            console.log('Estado del sistema:', status, message);
         }
 
         async function cargarDatos() {
@@ -1055,10 +922,10 @@
                 if (!navigator.onLine) {
                     isOffline = true;
                     if (isCacheValid()) {
-                        updateConnectionStatus('error', 'Sin conexión. Mostrando datos en caché.', true);
+                        updateConnectionStatus('error', '', true);
                         await mostrarDatos(cachedData);
                     } else {
-                        updateConnectionStatus('error', 'Sin conexión a internet. Sin datos disponibles.', true);
+                        updateConnectionStatus('error', 'Sin conexión a internet. Sin datos disponibles.');
                     }
                     actualizacionEnProceso = false;
                     return;
@@ -1145,17 +1012,6 @@
             return new Promise((resolve) => {
                 const container = document.getElementById('grupos-container');
                 const fragmento = document.createDocumentFragment();
-
-                // Limpiar contenedor antes de procesar
-                container.innerHTML = ''; 
-                
-                if (!gruposOrdenados || gruposOrdenados.length === 0) {
-                    if (!isOffline) { // No mostrar "sin datos" si solo está offline sin caché
-                         container.innerHTML = `<p class="dashboard-subtitle" style="text-align: center; width: 100%;">No se encontraron datos para mostrar.</p>`;
-                    }
-                    resolve();
-                    return;
-                }
                 
                 const ciclaIndex = gruposOrdenados.findIndex(g => g.nombre === "Cicla");
                 let ciclaGroup = ciclaIndex !== -1 ? gruposOrdenados.splice(ciclaIndex, 1)[0] : null;
@@ -1202,16 +1058,7 @@
                             const isCiclaHighlight = grupo.nombre === "Cicla" && usuario.pinceles > 5000;
                             const pincelesClasses = `pinceles-count${usuario.pinceles < 0 ? ' negative' : ''}${isCiclaHighlight ? ' cicla-highlight' : ''}`;
                             
-                            // Estructura de item de usuario actualizada
-                            usuarioItem.innerHTML = `
-                                <div class="usuario-info-left">
-                                    ${getRankIndicator(uIndex + 1, usuario.pinceles < 0)}
-                                    <span class="usuario-nombre" data-usuario='${JSON.stringify(usuario)}' data-grupo='${JSON.stringify(grupo)}' data-posicion-grupo='${index + 1}' data-posicion-individual='${uIndex + 1}'>
-                                        ${usuario.nombre}${trendingIcon}
-                                    </span>
-                                </div>
-                                <span class="${pincelesClasses}">${formatNumber(usuario.pinceles)}</span>
-                            `;
+                            usuarioItem.innerHTML = `${getRankIndicator(uIndex + 1, usuario.pinceles < 0)}<span class="usuario-nombre" data-usuario='${JSON.stringify(usuario)}' data-grupo='${JSON.stringify(grupo)}' data-posicion-grupo='${index + 1}' data-posicion-individual='${uIndex + 1}'>${usuario.nombre}${trendingIcon}</span><span class="${pincelesClasses}">${formatNumber(usuario.pinceles)}</span>`;
                             usuariosLista.appendChild(usuarioItem);
                         });
                     } else {
@@ -1223,7 +1070,7 @@
                     fragmento.appendChild(grupoElement);
                 });
 
-                // container.innerHTML = ''; // Movido al inicio de la función
+                container.innerHTML = '';
                 container.appendChild(fragmento);
                 
                 if (openGroupName) {
@@ -1323,27 +1170,17 @@
         }
 
         function setupModals() {
-            // Lógica de Modales
             document.querySelectorAll('.modal').forEach(modal => {
                 modal.addEventListener('click', (e) => {
                     if (e.target === modal) modal.classList.remove('active');
                 });
             });
-            
-            // Botón de Admin (UX-D)
-            const adminModal = document.getElementById('gestion-modal');
-            const claveInput = document.getElementById('clave-input');
-            document.querySelector('#admin-btn').addEventListener('click', () => {
-                adminModal.classList.add('active');
-                setTimeout(() => claveInput.focus(), 300); // Dar tiempo a la transición
-            });
-            document.querySelector('#modal-cancel').addEventListener('click', () => adminModal.classList.remove('active'));
+            document.querySelector('#gestion-titulo').addEventListener('click', () => document.getElementById('gestion-modal').classList.add('active'));
+            document.querySelector('#modal-cancel').addEventListener('click', () => document.getElementById('gestion-modal').classList.remove('active'));
             document.querySelector('#modal-submit').addEventListener('click', verificarClave);
-            claveInput.addEventListener('keypress', (e) => e.key === 'Enter' && verificarClave());
+            document.querySelector('#clave-input').addEventListener('keypress', (e) => e.key === 'Enter' && verificarClave());
             
-            // Modal de Estudiante (UX-D)
-            const studentModal = document.getElementById('student-modal');
-            document.querySelector('.close-student-modal').addEventListener('click', () => studentModal.classList.remove('active'));
+            document.querySelector('.close-student-modal').addEventListener('click', () => document.getElementById('student-modal').classList.remove('active'));
             
             document.getElementById('page-overlay').addEventListener('click', closeExpandedGroup);
         }
@@ -1373,7 +1210,6 @@
         function showStudentInfo(usuario, grupo, posGrupo, posInd) {
             const modal = document.getElementById('student-modal');
             const infoGrid = document.getElementById('student-info-grid');
-            const closeButton = modal.querySelector('.close-student-modal');
             const totalPinceles = usuario.pinceles || 0;
             const posIndClass = posInd >= 1 && posInd <= 6 ? `position-${posInd}` : 'accent';
             const posGrupoClass = posGrupo >= 1 && posGrupo <= 6 ? `position-${posGrupo}` : 'accent';
@@ -1386,7 +1222,6 @@
                 <div class="student-info-card"><div class="student-info-label">Total Grupo</div><div class="student-info-value accent">${formatNumber(grupo.total)}</div></div>
                 <div class="student-info-card"><div class="student-info-label">% del Grupo</div><div class="student-info-value accent">${grupo.total !== 0 ? ((totalPinceles / grupo.total) * 100).toFixed(1) : 0}%</div></div>`;
             modal.classList.add('active');
-            setTimeout(() => closeButton.focus(), 300); // Poner foco en el botón de cerrar (UX-D)
         }
         
         function hideWelcomeScreen() {
